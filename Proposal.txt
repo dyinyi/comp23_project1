@@ -1,0 +1,131 @@
+To: Ming Chow
+From: Nick Flores, Yi Ding, Zach Zager
+Date: September 22, 2015
+Subject: Phaser Game
+
+Game Title: Shooter Blaster
+
+
+Overview: 
+
+Drive and blast your way to victory in this thrilling action game. Take control of a rogue hacker, aiming to make an impact in the cyber world. Upgrade your vehicle to blast enemies and dodge their attacks in your quest to be the baddest hacker on the web.
+
+
+Rules:
+
+The players must get through each level without losing all of their health. The players have a health bar. Once this has been reduced to zero, the player’s character is destroyed and they must start from the beginning of the level. Health is reduced when attacked by an enemy or when crashing into the wall. Players shoot different classes of enemies who all have their own health bars. Enemies are destroyed when they lose all of their health. This releases coins that players collect to upgrade their vehicle. The player completes a level when they pass a finish line.
+
+
+Story:
+
+You play as Krombopulous Michael, a super hacker from Kalamazoo. He lives a humble life, using his hacking abilities for good. Hacking non-profit websites and organizing their finances is a daily activity for Krombopulous. Unfortunately, the United States government caught wind of Krombopulous. They feared that a man as powerful as him could be a threat if he fell into the wrong hands. Worse yet, they’ve blamed him for a cyberattack on a chemical plant in New Jersey, which exposed dozens of Garden State residents to mutagenic radiation. Now, Krombopulous must clear his name. Will he expose the US government for the corrupt organization it is? Will he join them in their insatiable quest for world domination?
+
+
+Gameplay Mode:
+
+Standard Mode(two-player co-op):
+Two player will be playing together side by side using keyboard and mouse respectively.
+Player One drives the vehicle using classic key W.A.S.D. setting. Key 1 and 2 are  assigned for special vehicle abilities(e.g. drifting for a sports car, shield and speed boost for a tank and eco-drive mode for a prius).
+Player Two is in charge of the shooting aspect of the game. Player uses mouse to aim, and left and right click to shoot in different modes(e.g. left click for machine gun and right click for cannon).
+
+Single Player Mode:
+For the driving part, player uses W.A.S.D setting to control movements and Q.E for special vehicle abilities(more user friendly for a single hand control than key 1 and 2). 
+Player uses mouse to aim, and left and right click to shoot in different modes.
+
+Boss Rush (bonus):
+Upon completing all storylines in a certain mode, the boss rush mode will be unlocked in which players will be using a standard character to challenge all bosses sequentially.
+
+
+Challenges:
+
+At the end of the game, player(s) will get a score based on performance(factoring time used, death count, bitcoin collected, mission completion percentage and so on).
+Completing all storylines in a certain mode will unlock the boss rush mode for that mode.
+The game has multiple global scoreboards for standard mode, single player mode and boss rush.
+Players can replay the game to perfecting their gameplay, builds and strategy in order to compete on the scoreboards.
+
+
+Core Features in the Game:
+
+Vehicle/Movement:
+
+The most important feature of the game is the driving mechanics. Since the player controls a vehicle. The car can move forward, turn left and right, and reverse. The car sustains damage when it crashes into walls or is hit by enemy attacks. The car is controlled by player one. The driving mechanics change when players get upgrades.
+
+Shooting:
+
+Shooting is the next most important feature of the game since it is how players will deal damage to enemies. This allows them to avoid taking damage and collect coins that enemies drop when destroyed. The car has a turret on top. The player starts with a basic automatic machine gun. Types of guns will change as players get upgrades and can choose from different weapons. Shooting is either done by player one (single player) or player two (cooperative).
+
+Enemies:
+
+ Enemies are broken down into five different classes. The first class are very weak, though numerous. The second are also weak though they have more specialized weapons. The third class are pretty strong and often command the first class and use them as shields. The fourth class are very strong and take a lot of firepower to take down. The fifth class are essentially mini-bosses. Most of the enemies in the game are based on these classes. In addition to the normal enemies, this game has bosses. The player battles them at the end of every set of three levels. The bosses are the biggest and baddest enemies in the game, who drop specific items/upgrades.
+
+Upgrades:
+
+Players advance through the game by improving their driving skills and by purchasing power ups between levels. Players spend the coins they pick up from defeated enemies at a shop between levels. They can purchase weapons, health, armor, and driving upgrades. These help the player drive better, withstand more attacks, and deal more damage. Players can also buy upgrades like coin magnets and cooler car models. 
+
+Levels:
+
+The level design is another important aspect of the game. The levels are designed to be dynamic and exciting. The first set of levels are computer sciences themed, featuring binary code and damage-inducing segfaults.
+
+
+Game Mechanics:
+
+Movement:
+
+The driving mechanics are the most critical part of the game. The car’s movement and acceleration will likely be handled by Phaser’s built in movement functions for in-game assets. Collisions are also very important. We will have to account for objects of different sizes hitting the player’s car. Algorithms will also be used to control enemy movement and attack behavior.
+
+Advancement:
+
+Save data will keep track of the player’s game progress and upgrades. To advance through the game, players must complete each level. Levels end when all enemies are destroyed or evaded, when the player crosses the finish line, or when the final boss is defeated. 
+
+Opponent Interaction:
+
+Enemies become increasingly difficult as the game progresses so it is important to collect coins from fallen enemies to buy upgrades for your vehicle. 
+
+
+Internal Economy
+
+Money
+Money is collected in the form of Bitcoins that fall out of enemies
+If the player is within a certain radius of the Bitcoins they are automatically collected, else player must move towards them.
+Bitcoins are used to upgrade the vehicle and weapons. Upgrades will vary from 100 coins - 5000 coins and everything in between. Accordingly, enemies will drop varying amounts of coins, from 2 coins - 20 coins per enemy. 
+Health
+The player begins each level with 100 Health Points (HP).
+There are no lives in this game. 
+Ammo
+NO ammo costs in this game.
+Damage
+There are essentially two types of damage in this game.
+True Damage affects the player's health points directly, disregarding armor stats.
+Physical Damage affects HP only if there is no armor present. Physical Damage will apply its damage to armor firstly if it’s present.
+Armor [PENDING]
+Armor is essentially another set of Health Points. It’ll be one of the cheaper upgrades in the game. All incoming Physical Damage will be afflicted upon the Armor Points instead of Health Points.
+
+
+Game Balance
+
+Positive feedback:
+
+Hitting enemies will result enemies flashing, sound cue will also be played
+Killing enemies will cause Bitcoins to drop
+Some good plays(e.g. dodging bullets using drifting) which will not be rewarded  in the score will get a visual recognition complementing them
+
+Negative feedback:
+
+Getting hit by enemies will cause the player's avatar to flash and cue a sound according to the damage dealers' type
+Getting killed will cause a retry screen to pop
+
+Adjusting the game's difficulty:
+
+Players cannot adjust the game difficulty. Players can play the cleared levels multiple times to gather more Bitcoins for upgrading therefore make it easier to progress.
+From a balancing perspective, the game's difficulty differentiates in three aspects, namely enemies' firing frequency, enemies' overall damage, enemies' health. Specific numbers can be tuned using JSON.
+
+
+Victory Conditions
+
+Victory is achieved once all the levels are complete and bosses in all three servers are killed. 
+Losses will occur when the player loses all their health points. They get sent back to the shop to re-upgrade and try again. 
+At first, there is only one server to choose from. The levels are on the beginner side and the final boss is NSA. When the player is about to kill the NSA boss, he gives two options that decided the game path:
+OPTION 1: NSA offers you a position as a full-time hacker. This brings the player to a new server where the final boss is taking down Anonymous. In the third and final world of this path, you are recruited by the CIA to take down North Korea and provide internet for the starving North Korean citizens.
+OPTION 2: You KILL the NSA boss. Once you deny his offer and kill him, you enter down the path of a rogue hacker. The next server aims to shut down FOX news and in the third world, the player attacks CIA (now working against them) to delete all their records.
+NOTE: Working for NSA and becoming a rogue hacker each have their strengths.
+With variations in upgrades and a co-op story mode, we hope losses will encourage fun replayability.
