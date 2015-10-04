@@ -1,7 +1,7 @@
 // game.js
 // SimpleShooter game file
 
-var boundsX = 500, boundsY = 300;
+var boundsX = 1000, boundsY = 600;
 var game = new Phaser.Game(boundsX, boundsY, Phaser.AUTO, "game",
                     {preload:preload, update:update, create:create});
 
