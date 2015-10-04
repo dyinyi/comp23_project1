@@ -7,11 +7,7 @@ Player.prototype.force = {x:0.0, y:0.0};
 
 // control stuff
 var wasd;
-
-// bullet stuff
-var bullet;
-var fireRate = 1000;
-var nextFire = 0;
+var arsenal;
 
 // Arthur's sample code was instrumental in making
 // this function
@@ -34,6 +30,15 @@ function Player(game, x, y) {
         right: game.input.keyboard.addKey(Phaser.Keyboard.D),
     }
 
+    // dictionary for weapons choice
+    arsenal = {
+    	bullets: game.input.keyboard.addKey(Phaser.Keyboard.Z),
+    	rockets: game.input.keyboard.addKey(Phaser.Keyboard.X),
+    	laser: game.input.keyboard.addKey(Phaser.Keyboard.C),
+    }
+
+    // weapons: 1 = bullets, 2 = rockets, 3 = lasers
+    this.weapon = 'bullets';
 }
 
 Player.prototype.update = function() {
@@ -59,32 +64,31 @@ Player.prototype.update = function() {
         player.x += 4;
     }
 
-    /* BULLET STUFF */
-    bullets = game.add.group();
-    bullets.enableBody = true;
-    bullets.physicsBodyType = Phaser.Physics.ARCADE;
+    // if player chooses different weapons
+    if (arsenal.bullets.isDown) {
+    	player.weapon = 'bullets';
+    }
+    else if (arsenal.rockets.isDown) {
+    	player.weapon = 'rockets';
+    }
+    else if (arsenal.laser.isDown) {
+    	player.weapon = 'laser';
+    }
 
-    bullets.createMultiple(1,'ball');
-    bullets.setAll('checkWorldBounds',true);
-    bullets.setAll('outOfBoundsKill',true);
-
+    // checks for user input for weapons fire
     if (game.input.activePointer.isDown) {
-    	fire();
+    	// weapons: 1 = bullets, 2 = rockets, 3 = lasers
+    	if (this.weapon === 'bullets') {
+    		prepBulletFire();
+    	}
+
+    	else if (this.weapon === 'rockets') {
+    		prepRocketFire();
+    	}
+
+    	else if (this.weapon === 'laser') {
+    		prepLaserFire();
+    	}
     }
 
 }
-
-function fire() {
-
-	if (game.time.now > nextFire && bullets.countDead() > 0) {
-		nextFire = game.time.now + fireRate;
-
-		bullet = bullets.getFirstDead();
-
-		bullet.reset(player.x - 0, player.y - 8);
-
-		game.physics.arcade.moveToPointer(bullet, 300);
-	}
-
-}
-
