@@ -11,7 +11,7 @@ var bullets;
 function preload () {
     game.load.image('space', 'images/Deep-Space.jpg');
     game.load.image('speedship','ship_sprites/speedship.png');
-    game.load.image('p','ship_sprites/heavyfreighter.png');
+    game.load.image('player','images/basicCar.png');
     game.load.image('ball','images/pokeball.png'); 
             // http://creepypasta81691.deviantart.com/art/Pokeball-Sprite-295593219
     /*game.load.image('cat', 'spaceship.png');

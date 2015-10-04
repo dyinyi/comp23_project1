@@ -17,8 +17,8 @@ var nextFire = 0;
 // this function
 function Player(game, x, y) {
 
-    Phaser.Sprite.call(this, game, x, y, 'p');
-    this.scale.set(1, 1);
+    Phaser.Sprite.call(this, game, x, y, 'player');
+    this.scale.set(0.15, 0.15);
     this.anchor.setTo(0.5, 0.5);
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.allowRotation = false;
