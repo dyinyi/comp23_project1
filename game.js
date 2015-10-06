@@ -5,7 +5,6 @@ var boundsX = 1000, boundsY = 600;
 var game = new Phaser.Game(boundsX, boundsY, Phaser.AUTO, "game",
                     {preload:preload, update:update, create:create});
 
-//var enemy;
 var bullets;
 
 function preload () {

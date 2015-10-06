@@ -1,6 +1,8 @@
 // enemy.js
 // ShooterBlaster enemy file
 
+var enemy;
+
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
 Enemy.prototype.constructor = Enemy;
 Enemy.prototype.force = {x:0.0, y:0.0};
@@ -37,7 +39,13 @@ Enemy.prototype.update = function() {
 
 // Lowers enemy health based on power of taken weapon fire
 Enemy.prototype.enemyTakesDamage = function(enemy,projectile) {
-    console.log(projectile);
+
+    //var kind = projectile.key;
+
+    //console.log(weaponDamage);
+    //console.log(projectile);
+
+
     // bullet damage
     if (projectile.key === 'pokeball') {
         this.damage(1);

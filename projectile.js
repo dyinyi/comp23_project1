@@ -5,66 +5,57 @@
 // bomb = rocket
 // blueBall = laser
 
-var fireRate = 1000;
+singleRound.prototype = Object.create(Phaser.Sprite.prototype);
+singleRound.prototype.constructor = singleRound;
+
+// generic round/projectile
+function singleRound(img,proportion,rate,pwr,speed,homing) {
+
+    this.img = img;
+    this.proportion = proportion;
+    this.fireRate = rate;
+    this.power = pwr;
+    this.speed = speed;
+    this.homing = homing;
+
+}
+
+// weapon information objects
+var bullet = new singleRound('pokeball',0.5,80,1,300,false);
+var rocket = new singleRound('bomb',0.5,500,20,350,true);
+var laser = new singleRound('blueBall',0.4,1,2,100,false);
+
+// dictionary of weapons
+var weaponDamage = {
+    pokeball: bullet.power,
+    bomb: rocket.power,
+    blueBall: laser.power,
+}
+
 var nextFire = 0;
 
-// prep firing bullets
-function prepBulletFire() {
+// prep firing weapon
+// Made based on the very helpful Phaser game: Tanks
+//      http://phaser.io/examples/v2/games/tanks
+function singleFire(group,single) {
+
+    // establish physics
+    group.enableBody = true;
+    group.physicsBodyType = Phaser.Physics.ARCADE;
+
+    // create sprite and define boundary properties
+    group.createMultiple(1,single.img);
+    this.classType = singleRound;
+    group.setAll('checkWorldBounds',true);
+    group.setAll('outOfBoundsKill',true);
+
+    // fire weapon 
+    if (game.time.now > nextFire && group.countDead() > 0) {
+        nextFire = game.time.now + single.fireRate;
+        var round = group.getFirstDead();
+        round.scale.setTo(single.proportion,single.proportion);
+        round.reset(player.x, player.y - 20);
+        game.physics.arcade.moveToPointer(round,single.speed);
+    }
     
-    bullets.enableBody = true;
-    bullets.physicsBodyType = Phaser.Physics.ARCADE;
-
-    bullets.createMultiple(1,'pokeball');
-    bullets.setAll('checkWorldBounds',true);
-    bullets.setAll('outOfBoundsKill',true);
-
-    fireRate = 10;
-
-    fire(bullets);
-
-}
-
-// prep firing rockets
-function prepRocketFire() {
-    
-    rockets.enableBody = true;
-    rockets.physicsBodyType = Phaser.Physics.ARCADE;
-
-    rockets.createMultiple(1,'bomb');
-    rockets.setAll('checkWorldBounds',true);
-    rockets.setAll('outOfBoundsKill',true);
-
-    fireRate = 500;
-
-    fire(rockets);
-
-}
-
-// prep firing lasers
-function prepLaserFire() {
-    
-    lasers.enableBody = true;
-    lasers.physicsBodyType = Phaser.Physics.ARCADE;
-
-    lasers.createMultiple(1,'blueBall');
-    lasers.setAll('checkWorldBounds',true);
-    lasers.setAll('outOfBoundsKill',true);
-
-    fireRate = 10;
-
-    fire(lasers);
-
-}
-
-// fires projectiles
-function fire(projectile) {
-
-	if (game.time.now > nextFire && projectile.countDead() > 0) {
-		nextFire = game.time.now + fireRate;
-		var round = projectile.getFirstDead();
-		round.scale.setTo(0.5,0.5);
-		round.reset(player.x - 0, player.y - 8);
-		game.physics.arcade.moveToPointer(round, 300);
-	}
-
 }

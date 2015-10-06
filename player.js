@@ -8,6 +8,7 @@ Player.prototype.force = {x:0.0, y:0.0};
 // control stuff
 var wasd;
 var arsenal;
+var player;
 
 // Arthur's sample code was instrumental in making
 // this function
@@ -64,30 +65,24 @@ Player.prototype.update = function() {
         player.x += 4;
     }
 
-    // if player chooses different weapons
+    // player chooses desired weapon
     if (arsenal.bullets.isDown) {
     	player.weapon = 'bullets';
-    }
-    else if (arsenal.rockets.isDown) {
+    } else if (arsenal.rockets.isDown) {
     	player.weapon = 'rockets';
-    }
-    else if (arsenal.laser.isDown) {
+    } else if (arsenal.laser.isDown) {
     	player.weapon = 'laser';
     }
 
-    // checks for user input for weapons fire
+    // Checks for user input (click) for weapons fire
+    // Fires weapon based on selection (Z,X,C)
     if (game.input.activePointer.isDown) {
-    	// weapons: 1 = bullets, 2 = rockets, 3 = lasers
     	if (this.weapon === 'bullets') {
-    		prepBulletFire();
-    	}
-
-    	else if (this.weapon === 'rockets') {
-    		prepRocketFire();
-    	}
-
-    	else if (this.weapon === 'laser') {
-    		prepLaserFire();
+            singleFire(bullets,bullet);
+    	} else if (this.weapon === 'rockets') {
+            singleFire(rockets,rocket);
+    	} else if (this.weapon === 'laser') {
+            singleFire(lasers,laser);
     	}
     }
 
