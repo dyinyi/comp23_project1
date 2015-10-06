@@ -13,6 +13,8 @@ function Enemy(game,x,y) {
     this.body.allowRotation = false;
     game.add.existing(this);
 
+    this.body.setSize(25, 25, 0, -5);
+
     this.health = 1000;
 
     //  Show health
@@ -44,7 +46,7 @@ Enemy.prototype.enemyTakesDamage = function(enemy,projectile) {
 
     // rocket damage
     else if (projectile.key === 'bomb') {
-        this.damage(10);
+        this.damage(50);
         projectile.destroy();
     }
 
