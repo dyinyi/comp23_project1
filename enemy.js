@@ -53,16 +53,15 @@ Enemy.prototype.update = function() {
 
 }
 
-
 // Lowers enemy health based on power of taken weapon fire
 Enemy.prototype.enemyTakesDamage = function(enemy,projectile) {
 
     this.damage(projectile.parent.power);
     
-    if (projectile.parent.name==="bullets"||projectile.parent.name==="lasers") {
-        projectile.destroy();
-    } else if (projectile.parent.name === "rockets") {
+    if (projectile.parent.homing) {
         explode(projectile);
+    } else {
+        projectile.destroy();
     }
 
 }
