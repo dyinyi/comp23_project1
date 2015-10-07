@@ -1,11 +1,10 @@
 // game.js
 // SimpleShooter game file
 
-var boundsX = 1000, boundsY = 600;
+var boundsX = 800, boundsY = 400;
 var game = new Phaser.Game(boundsX, boundsY, Phaser.AUTO, "game",
                     {preload:preload, update:update, create:create});
 
-var bullets;
 
 function preload () {
     game.load.image('space', 'images/Deep-Space.jpg');
@@ -17,6 +16,8 @@ function preload () {
         // http://www.zeldadungeon.net/wiki/images/a/a9/Ball-1.png
     game.load.image('bomb','images/bomb.png'); 
         // http://www.zeldaelements.net/images/games/the_minish_cap/items_and_equipment/bombs.png
+    game.load.spritesheet('explosion','images/explosion.png',60,60);
+        // korzonrocknet.deviantart.com
         
 }
 
@@ -28,51 +29,20 @@ function create() {
     game.add.tileSprite(0, 0, game.width, game.height, 'space');
 
     // add player
-    player = new Player(game, game.world.centerX, game.world.centerY); 
+    player = new Player(game, game.world.randomX, game.world.randomY); 
     
     // Make enemy
-    enemy = new Enemy(game, game.world.randomX, game.world.randomY);
-    /*enemy2 = new Enemy(game, game.world.randomX, game.world.randomY);
-    enemy3 = new Enemy(game, game.world.randomX, game.world.randomY);
-    enemy4 = new Enemy(game, game.world.randomX, game.world.randomY);
-    enemy5 = new Enemy(game, game.world.randomX, game.world.randomY);
-    */
+    //enemy = new Enemy(game, game.world.randomX, game.world.randomY);
+    enemy = new Enemy(game, game.world.centerX, game.world.centerY);
 
     // weapon groups
-    bullets = game.add.group();
-    rockets = game.add.group();
-    lasers = game.add.group();
+    projectiles = new Projectile(game);
 
 }
 
 function update() {
 
-}
-
-/*
-// kills the rock and adds to your score
-function killRock(player, collider) {
-
-    collider.kill();
-
-    //  Add and update the score
-    score += 10;
-    scoreText.text = 'Score: ' + score;
+    // homing weapons
+    rockets.forEachAlive(startHoming,enemy);  //make bullets accelerate to ship
 
 }
-
-// Lose situations
-function losing() {
-
-    //  You Lose!
-    gameEnd = game.add.text(300, 250, 'You Lose!', 
-                        { fontSize: '100px', fill: '#ffffff' });
-}
-
-// Win situations
-function win() {
-    //  You Win!
-    gameEnd = game.add.text(300, 250, 'You Win!', 
-                        { fontSize: '100px', fill: '#ffffff' });
-}
-*/

@@ -15,9 +15,9 @@ function Enemy(game,x,y) {
     this.body.allowRotation = false;
     game.add.existing(this);
 
-    this.body.setSize(25, 25, 0, -5);
+    this.body.setSize(20,20);
 
-    this.health = 1000;
+    this.health = 100;
 
     //  Show health
     healthText = game.add.text(16, 16, 'health: ' + this.health, 
@@ -34,34 +34,35 @@ Enemy.prototype.update = function() {
     game.physics.arcade.overlap(this,bullets,this.enemyTakesDamage,null,this);
     game.physics.arcade.overlap(this,rockets,this.enemyTakesDamage,null,this);
     game.physics.arcade.overlap(this,lasers,this.enemyTakesDamage,null,this);
+
+    while (this.health < 0) {
+        this.health = 0;
+    }
+
+    x = Math.random();
+
+    if (x < 0.25) {
+        enemy.x += 4;
+    } else if (x < 0.5 && x > 0.25) {
+        enemy.y += 4;
+    } else if (x < 0.75 && x > 0.5) {
+        enemy.x -= 4;
+    } else {
+        enemy.y -= 4;
+    }
+
 }
 
 
 // Lowers enemy health based on power of taken weapon fire
 Enemy.prototype.enemyTakesDamage = function(enemy,projectile) {
 
-    //var kind = projectile.key;
-
-    //console.log(weaponDamage);
-    //console.log(projectile);
-
-
-    // bullet damage
-    if (projectile.key === 'pokeball') {
-        this.damage(1);
+    this.damage(projectile.parent.power);
+    
+    if (projectile.parent.name==="bullets"||projectile.parent.name==="lasers") {
         projectile.destroy();
-    }
-
-    // rocket damage
-    else if (projectile.key === 'bomb') {
-        this.damage(50);
-        projectile.destroy();
-    }
-
-    // laser damage
-    else if (projectile.key === 'blueBall') {
-        this.damage(2);
-        projectile.destroy;
+    } else if (projectile.parent.name === "rockets") {
+        explode(projectile);
     }
 
 }
