@@ -10,8 +10,7 @@ var wasd;
 var arsenal;
 var player;
 
-// Arthur's sample code was instrumental in making
-// this function
+// Arthur's sample code was instrumental in making this function
 function Player(game, x, y) {
 
     Phaser.Sprite.call(this, game, x, y, 'player');
@@ -49,40 +48,40 @@ Player.prototype.update = function() {
     var mY = game.input.mousePointer.y;
     
     // look at the mouse
-    player.angle = Math.atan2(player.position.x - mX, player.position.y - mY)  * -57.2957795;
+    this.angle = Math.atan2(player.position.x - mX, player.position.y - mY)  * -57.2957795;
 
     // move player sprite around
     if (wasd.up.isDown) {
-        player.y -= 4;
+        this.y -= 4;
     }
     if (wasd.down.isDown) {
-        player.y += 4;
+        this.y += 4;
     }
     if (wasd.left.isDown) {
-        player.x -= 4;
+        this.x -= 4;
     }
     if (wasd.right.isDown) {
-        player.x += 4;
+        this.x += 4;
     }
 
     // player chooses desired weapon
     if (arsenal.bullets.isDown) {
-    	player.weapon = 'bullets';
+    	this.weapon = 'bullets';
     } else if (arsenal.rockets.isDown) {
-    	player.weapon = 'rockets';
+    	this.weapon = 'rockets';
     } else if (arsenal.laser.isDown) {
-    	player.weapon = 'laser';
+    	this.weapon = 'laser';
     }
 
     // Checks for user input (click) for weapons fire
     // Fires weapon based on selection (Z,X,C)
     if (game.input.activePointer.isDown) {
     	if (this.weapon === 'bullets') {
-            singleFire(bullets,bullet);
+            singleFire(bullets);
     	} else if (this.weapon === 'rockets') {
-            singleFire(rockets,rocket);
+            singleFire(rockets);
     	} else if (this.weapon === 'laser') {
-            singleFire(lasers,laser);
+            singleFire(lasers);
     	}
     }
 
